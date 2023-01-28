@@ -295,3 +295,16 @@ export interface MarkerClickCallbackData extends MarkerCallbackData {
 export interface MyLocationButtonClickCallbackData {
   mapId: string;
 }
+
+
+/**
+ * An interface representing the viewports latitude and longitude bounds.
+ */
+export interface CircleOptions {
+  radius: number;
+  mapId?: string;
+  center: LatLng;
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
+}

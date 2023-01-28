@@ -272,6 +272,7 @@ export default MyMap;
 * [`create(...)`](#create)
 * [`enableClustering()`](#enableclustering)
 * [`disableClustering()`](#disableclustering)
+* [`addCircle(...)`](#addcircle)
 * [`addMarker(...)`](#addmarker)
 * [`addMarkers(...)`](#addmarkers)
 * [`removeMarker(...)`](#removemarker)
@@ -336,6 +337,19 @@ enableClustering() => Promise<void>
 ```typescript
 disableClustering() => Promise<void>
 ```
+
+--------------------
+
+
+### addCircle(...)
+
+```typescript
+addCircle(options: CircleOptions) => Promise<void>
+```
+
+| Param         | Type                                                    |
+| ------------- | ------------------------------------------------------- |
+| **`options`** | <code><a href="#circleoptions">CircleOptions</a></code> |
 
 --------------------
 
@@ -715,6 +729,20 @@ An interface representing a pair of latitude and longitude coordinates.
 | Prop        | Type                |
 | ----------- | ------------------- |
 | **`mapId`** | <code>string</code> |
+
+
+#### CircleOptions
+
+An interface representing the viewports latitude and longitude bounds.
+
+| Prop              | Type                                      |
+| ----------------- | ----------------------------------------- |
+| **`radius`**      | <code>number</code>                       |
+| **`mapId`**       | <code>string</code>                       |
+| **`center`**      | <code><a href="#latlng">LatLng</a></code> |
+| **`fillColor`**   | <code>string</code>                       |
+| **`strokeColor`** | <code>string</code>                       |
+| **`strokeWidth`** | <code>number</code>                       |
 
 
 #### Marker

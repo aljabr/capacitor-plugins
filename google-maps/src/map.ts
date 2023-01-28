@@ -15,6 +15,7 @@ import type {
   MarkerClickCallbackData,
   MyLocationButtonClickCallbackData,
   LatLngBounds,
+  CircleOptions,
 } from './definitions';
 import type { CreateMapArgs } from './implementation';
 import { CapacitorGoogleMaps } from './implementation';
@@ -26,6 +27,7 @@ export interface GoogleMapInterface {
   ): Promise<GoogleMap>;
   enableClustering(): Promise<void>;
   disableClustering(): Promise<void>;
+  addCircle(options: CircleOptions): Promise<void>;
   addMarker(marker: Marker): Promise<string>;
   addMarkers(markers: Marker[]): Promise<string[]>;
   removeMarker(id: string): Promise<void>;
@@ -251,6 +253,16 @@ export class GoogleMap {
     });
 
     return res.ids;
+  }
+
+  /**
+   * Adds circle
+   * @param options
+   * @returns void
+   */
+  async addCircle(options: CircleOptions): Promise<void> {
+    const res = await CapacitorGoogleMaps.addCircle(options);
+    return res;
   }
 
   /**

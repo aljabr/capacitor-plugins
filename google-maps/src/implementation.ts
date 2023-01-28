@@ -8,6 +8,7 @@ import type {
   MapPadding,
   MapType,
   Marker,
+  LatLng
 } from './definitions';
 
 /**
@@ -105,8 +106,18 @@ export interface OnScrollArgs {
   };
 }
 
+export interface CircleOptions {
+  radius: number;
+  mapId?: string;
+  center: LatLng;
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
+}
+
 export interface CapacitorGoogleMapsPlugin extends Plugin {
   create(options: CreateMapArgs): Promise<void>;
+  addCircle(args: CircleOptions): Promise<void>;
   addMarker(args: AddMarkerArgs): Promise<{ id: string }>;
   addMarkers(args: AddMarkersArgs): Promise<{ ids: string[] }>;
   removeMarker(args: RemoveMarkerArgs): Promise<void>;

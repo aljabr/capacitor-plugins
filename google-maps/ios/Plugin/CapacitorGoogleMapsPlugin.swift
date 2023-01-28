@@ -154,6 +154,43 @@ public class CapacitorGoogleMapsPlugin: CAPPlugin, GMSMapViewDelegate {
         }
     }
 
+    @objc func addCircle(_ call: CAPPluginCall) {
+        do {
+            guard let id = call.getString("mapId") else {
+                throw GoogleMapErrors.invalidMapId
+            }
+
+            guard let map = self.maps[id] else {
+                throw GoogleMapErrors.mapNotFound
+            }
+
+            let radius = call.getDouble("radius") ?? 0.0
+            let mapId: String = call.getString("mapId", "")
+            let center = call.getObject("center")
+            let fillColor: String = call.getString("fillColor","")
+            let strokeColor: String = call.getString("strokeColor","")
+
+            let coordinates = CLLocationCoordinate2D(
+                latitude: center?["lat"] as! CLLocationDegrees,
+                longitude: center?["lng"] as! CLLocationDegrees
+            )
+
+            DispatchQueue.main.async {
+                let circleCenter = coordinates
+                let circle = GMSCircle(position: circleCenter, radius: radius)
+                circle.fillColor = UIColor(red:0, green: 0.5, blue: 0, alpha: 0.3)
+                circle.strokeColor = UIColor(red:0, green: 0.5, blue: 0, alpha: 0.5)
+                circle.strokeWidth = 2
+                circle.map = map.mapViewController.GMapView
+                call.resolve()
+            }
+
+        } catch {
+            handleError(call, error: error)
+        }
+    }
+
+
     @objc func addMarkers(_ call: CAPPluginCall) {
         do {
             guard let id = call.getString("id") else {
