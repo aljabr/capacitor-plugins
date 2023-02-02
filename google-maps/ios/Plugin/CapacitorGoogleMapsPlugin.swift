@@ -2,6 +2,28 @@ import Foundation
 import Capacitor
 import GoogleMaps
 import GoogleMapsUtils
+import UIKit
+
+extension UIColor {
+    convenience init(hex: String) {
+        let scanner = Scanner(string: hex)
+        scanner.scanLocation = 0
+
+        var rgbValue: UInt64 = 0
+
+        scanner.scanHexInt64(&rgbValue)
+
+        let r = (rgbValue & 0xff0000) >> 16
+        let g = (rgbValue & 0xff00) >> 8
+        let b = rgbValue & 0xff
+
+        self.init(
+            red: CGFloat(r) / 0xff,
+            green: CGFloat(g) / 0xff,
+            blue: CGFloat(b) / 0xff, alpha: 1
+        )
+    }
+}
 
 extension GMSMapViewType {
     static func fromString(mapType: String) -> GMSMapViewType {
@@ -178,9 +200,9 @@ public class CapacitorGoogleMapsPlugin: CAPPlugin, GMSMapViewDelegate {
             DispatchQueue.main.async {
                 let circleCenter = coordinates
                 let circle = GMSCircle(position: circleCenter, radius: radius)
-                circle.fillColor = UIColor(red:0, green: 0.5, blue: 0, alpha: 0.3)
-                circle.strokeColor = UIColor(red:0, green: 0.5, blue: 0, alpha: 0.5)
-                circle.strokeWidth = 2
+                circle.fillColor = UIColor(hex: fillColor.replacingOccurrences(of: "#", with: ""))
+                circle.strokeColor = UIColor(hex: strokeColor.replacingOccurrences(of: "#", with: ""))
+                circle.strokeWidth = strokeWidthCGFloat
                 circle.map = map.mapViewController.GMapView
                 call.resolve()
             }
