@@ -165,11 +165,11 @@ export class CapacitorGoogleMapsWeb
             this.notifyListeners('onMyLocationClick', {});
           },
           () => {
-            throw new Error('Geolocation not supported on web browser.');
+            //throw new Error('Geolocation not supported on web browser.');
           },
         );
       } else {
-        throw new Error('Geolocation not supported on web browser.');
+        //throw new Error('Geolocation not supported on web browser.');
       }
     }
   }
@@ -253,6 +253,8 @@ export class CapacitorGoogleMapsWeb
       strokeOpacity: 0.8,
       strokeWeight: args.strokeWidth,
       fillColor: args.fillColor,
+      editable: true,
+      draggable: true,
       fillOpacity: 0.35,
       map: map,
       center: args.center,

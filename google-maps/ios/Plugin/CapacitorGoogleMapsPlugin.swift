@@ -200,8 +200,8 @@ public class CapacitorGoogleMapsPlugin: CAPPlugin, GMSMapViewDelegate {
             DispatchQueue.main.async {
                 let circleCenter = coordinates
                 let circle = GMSCircle(position: circleCenter, radius: radius)
-                circle.fillColor = UIColor(hex: fillColor.replacingOccurrences(of: "#", with: ""))
-                circle.strokeColor = UIColor(hex: strokeColor.replacingOccurrences(of: "#", with: ""))
+                circle.fillColor = UIColor(hex: fillColor.replacingOccurrences(of: "#", with: "")).withAlphaComponent(0.3)
+                circle.strokeColor = UIColor(hex: strokeColor.replacingOccurrences(of: "#", with: "")).withAlphaComponent(0.5)
                 circle.strokeWidth = strokeWidthCGFloat
                 circle.map = map.mapViewController.GMapView
                 call.resolve()
